@@ -1,4 +1,4 @@
 EJP
 ===
 
-EJP site created using Django web framework (Python)
+EJP site created using Drupal 7
