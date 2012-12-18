@@ -1,0 +1,24 @@
+name = EJP Main theme
+description = FOB EJP MAIN theme
+core = 6.x
+engine = phptemplate
+version = 6.x-1.01
+ 
+screenshot = images/screenshot.png
+
+features[] = favicon
+regions[header_block] = Header Block
+regions[footer_top] = Footer Top
+regions[footer_bottom] = Footer Bottom
+regions[sidebar_left] = Left Sidebar
+regions[sidebar_right] = Right Sidebar
+regions[content_top] = Content Top
+regions[content_bottom] = Content Bottom
+ 
+stylesheets[screen, projection][] = css/ejp.css
+#stylesheets[screen, projection][] = css/style.css
+stylesheets[screen, projection][] = css/style_ie.css
+stylesheets[screen, projection][] = css/reset.css
+stylesheets[screen, projection][] = css/lang.css
+ 
+scripts[] = js/social.js

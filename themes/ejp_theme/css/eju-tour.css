@@ -1,0 +1,303 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+body {
+    font: 12px/18px Arial,Tahoma,Verdana,sans-serif;
+    width: 100%;
+}
+
+#tour_bg{
+   min-width: 1000px;
+	width: 100%;
+	background-image: url(../images/tour_bg.gif);
+	background-position: top left;
+	background-repeat: repeat-x;
+	z-index: 150;
+	position: absolute;
+	top: -100px;
+}
+
+#tour_bg .cpanel{
+	margin: 0 auto;
+	width: 936px;
+	height: 49px;
+	background-image: url(../images/cpanel_bg.gif);
+	background-position: top left;
+	background-repeat: no-repeat;
+}
+
+#tour_bg .cpanel_name{
+	font-size: 22px;
+	font-weight: bold;
+	color: #fff;
+	line-height: 49px;
+    margin: 0 15px 0 30px;
+	display: inline;
+}
+
+#tour_bg .top_l .cpanel_name span{
+	color: #ffc956;
+	font-size: 22px;
+	font-weight: bold;
+}
+
+#tour_bg .top{
+	height: 49px;
+}
+
+	#tour_bg .top_l{
+		width: 757px;
+		height: 49px;
+		float: left;
+		background-image: url(../images/st_line_bg.gif);
+		background-position:right 4px;
+		background-repeat:no-repeat;
+	}
+	
+		#tour_bg .top_l span{
+			font-size: 12px;
+			color: #fff;
+			line-height: 49px;
+		}
+	
+	#tour_bg .top_r{
+		width: 176px;
+		height: 49px;
+		float: left;
+	}
+
+#tour_bg .bottom{
+	height: 51px;
+}
+
+#tour_bg #control a{
+	outline: none;
+	border: 0;
+}
+
+#tour_bg #control .m3,
+#tour_bg #control .m4
+{
+	float:right;
+}
+
+#tour_bg #control .m1 a, 
+#tour_bg #control .m1 a:link{
+	width: 88px;
+	height: 49px;
+	background-image: url(../images/cp_pause.gif);
+	background-position: top left;
+	background-repeat: no-repeat;
+	color: #bbd0d8;
+	text-decoration: none;
+	display: block;
+	line-height: 49px;
+	text-indent: 15px;
+	float: left;
+}
+
+#tour_bg #control .m1 a:hover{
+	width: 88px;
+	height: 49px;
+	background-image: url(../images/cp_pause.gif);
+	background-position: bottom left;
+	background-repeat: no-repeat;
+	color: #fff;
+	text-decoration: none;
+	display: block;
+}
+
+#tour_bg #control .m5 a, 
+#tour_bg #control .m5 a:link{
+	width: 88px;
+	height: 49px;
+	background-image: url(../images/cp_play.gif);
+	background-position: top left;
+	background-repeat: no-repeat;
+	color: #bbd0d8;
+	text-decoration: none;
+	display: block;
+	line-height: 49px;
+	text-indent: 15px;
+	float: left;
+}
+
+#tour_bg #control .m5 a:hover{
+	width: 88px;
+	height: 49px;
+	background-image: url(../images/cp_play.gif);
+	background-position: bottom left;
+	background-repeat: no-repeat;
+	color: #fff;
+	text-decoration: none;
+	display: block;
+}
+
+
+#tour_bg #control .m2 a, 
+#tour_bg #control .m2 a:link{
+	width: 100px;
+	height: 49px;
+	background-image: url(../images/cp_restart.gif);
+	background-position: top left;
+	background-repeat: no-repeat;
+	color: #bbd0d8;
+	text-decoration: none;
+	display: block;
+	line-height: 49px;
+	text-indent: 15px;
+	float: left;
+}
+
+#tour_bg #control .m2 a:hover{
+	width: 100px;
+	height: 49px;
+	background-image: url(../images/cp_restart.gif);
+	background-position: bottom left;
+	background-repeat: no-repeat;
+	color: #fff;
+	text-decoration: none;
+	display: block;
+}
+
+#tour_bg #control .m3 a, 
+#tour_bg #control .m3 a:link{
+	width: 119px;
+	height: 49px;
+	background-image: url(../images/cp_stop.gif);
+	background-position: top left;
+	background-repeat: no-repeat;
+	color: #bbd0d8;
+	text-decoration: none;
+	display: block;
+	line-height: 49px;
+	text-indent: 15px;
+	float: left;
+	font-size: 16px;
+}
+
+#tour_bg #control .m3 a:hover{
+	width: 119px;
+	height: 49px;
+	background-image: url(../images/cp_stop.gif);
+	background-position: bottom left;
+	background-repeat: no-repeat;
+	color: #fff;
+	text-decoration: none;
+	display: block;
+	font-size: 16px;
+}
+
+#tour_bg #control .m4 a, 
+#tour_bg #control .m4 a:link{
+	width: 57px;
+	height: 49px;
+	background-image: url(../images/cp_stop.gif);
+	background-position: top left;
+	background-repeat: no-repeat;
+	color: #bbd0d8;
+	text-decoration: none;
+	display: block;
+	line-height: 49px;
+	text-indent: 15px;
+	float: left;
+	font-size: 16px;
+}
+
+#tour_bg #control .m4 a:hover{
+	width: 57px;
+	height: 49px;
+	background-image: url(../images/cp_stop.gif);
+	background-position: bottom left;
+	background-repeat: no-repeat;
+	color: #fff;
+	text-decoration: none;
+	display: block;
+	font-size: 16px;
+}
+
+#cp_select{
+	width: 170px;
+	height: 21px;
+	vertical-align: middle;
+	border: 1px solid #072f43;
+	margin: 15px 5px 0 25px;
+	float: left;
+}
+
+#tour_bg #nav{
+	width: 62px;
+	height: 31px;
+	float: right;
+	margin: 10px 10px 0 0;
+}
+
+#tour_bg #nav a{
+	position: relative;
+	text-indent: -5000px;
+}
+
+#tour_bg #nav .previous{
+	width: 21px;
+	height: 31px;
+	float: left;
+}
+
+#tour_bg #nav .previous a, #tour_bg #nav .previous a:link{
+	width: 21px;
+	height: 31px;
+	display: block;
+	background-image: url(../images/nav-previous.gif);
+	background-position: top left;
+	background-repeat: no-repeat;
+}
+
+#tour_bg #nav .previous a:hover{
+	width: 21px;
+	height: 31px;
+	background-image: url(../images/nav-previous.gif);
+	background-position: bottom left;
+	background-repeat: no-repeat;
+}
+
+#tour_bg #nav .next{
+	width: 21px;
+	height: 31px;
+	float: right;
+}
+
+#tour_bg #nav .next a, #tour_bg #nav .next a:link{
+	width: 21px;
+	height: 31px;
+	display: block;
+	background-image: url(../images/nav-next.gif);
+	background-position: top left;
+	background-repeat: no-repeat;
+}
+
+#tour_bg #nav .next a:hover{
+	width: 21px;
+	height: 31px;
+	background-image: url(../images/nav-next.gif);
+	background-position: bottom left;
+	background-repeat: no-repeat;
+}
+
+#tour_bg .title_page{
+	font-size: 20px;
+	font-weight: bold;
+	line-height: 51px;
+	display: inline-block;
+	float: left;
+	margin: 0 0 0 25px;
+	width: 170px;
+}
+
+#tour_bg .info_page{
+	display: inline-block;
+	float: left;
+	margin: 5px 0 0 10px;
+	width: 650px;
+}

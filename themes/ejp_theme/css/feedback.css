@@ -1,0 +1,51 @@
+.webform-client-form {
+	margin: 0 0 0 15px;
+}
+.webform-component {
+	margin: 0 0 20px;
+}
+.content p {
+	padding: 0 0 5px 15px;
+}
+.description {
+	padding: 0 0 0 107px;
+}
+
+html.js .resizable-textarea textarea {
+    width: 270px;
+	
+}
+.resizable-textarea .grippie{
+	margin-left: 123px;
+	width: 275px;
+}
+
+label {
+    display: inline-block;
+    line-height: 23px;
+    vertical-align: top;
+    width: 123px;
+	float:left;
+	color: #575B5C;
+}
+.feedback_select{
+	width: 277px;
+	height: 23px;
+	color: #575b5c;
+	border: 1px solid #d9d9d9;
+}
+.send-feedback {
+    color: #FFFFFF;
+	 background-color: #a1a3a4;
+	 font-family: Arial, Tahoma, Verdana, sans-serif;
+    font-size: 12px;
+	 font-weight: bold;
+	 width: 275px;
+    height: 23px;
+    text-align: center;
+    text-decoration: none;
+	 margin: 0 0 40px 123px;
+	 border: 0;
+	 padding: 0;
+	 cursor: pointer;
+}

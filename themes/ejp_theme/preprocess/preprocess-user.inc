@@ -1,0 +1,1 @@
+<?php$vars['content']='33333';

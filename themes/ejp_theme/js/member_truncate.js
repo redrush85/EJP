@@ -1,0 +1,1 @@
+$('.myClass').truncatable({    limit: 200, more: '.....', less: true, hideText: '[hide]' });

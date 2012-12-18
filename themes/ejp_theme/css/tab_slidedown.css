@@ -1,0 +1,109 @@
+#tabs_search .selectbox{
+	width: 122px;
+	height:35px;
+	line-height:35px;
+	position:relative;
+	top: -1px;
+	text-decoration:none;
+	outline: medium none;
+	cursor: pointer;
+	padding: 0;
+	font:12px!important;
+	font-weight: bold;
+	color:#fff;
+	text-indent: 10px;
+	background-image: url(../images/tabs_static.gif);
+	background-position: top left;
+	cursor:pointer;
+	margin-left: 13px;
+}
+
+#tabs_search .makeMeFancy span{
+	margin: 0!important;
+	font:12px!important;
+	float:none;
+}
+
+#tabs_search .selectbox .display{
+	width: 122px;
+	height:35px;
+	line-height: 35px;
+	color:#fff;
+	display: block;
+	font:12px!important;
+	font-weight: bold;
+	text-decoration: none;	
+}
+
+#tabs_search .display .makeMeFancy{
+	font:12px!important;
+}
+
+#tabs_search .display .makeMeFancy .display, #tabs_search .selectbox .makeMeFancy span{
+	float: none;
+	margin: 0!important;
+	padding: 0;
+	font:12px;
+}
+
+#tabs_search .display .makeMeFancy .hover{
+	font:12px!important;
+}
+
+#tabs_search .selectbox a, #tabs_search .selectbox a:link, #tabs_search .selectbox a:hover, #tabs_search .selectbox a.focus{
+	width: 122px;
+	height:35px;
+	line-height: 35px;
+	color:#fff;
+	display: block;
+	text-decoration: none;
+	font:12px!important;
+}
+
+#tabs_search .items {
+	position:absolute;
+   z-index: 99999;
+	left: 74px;
+	top: 22px;
+	width:122px;
+	list-style:none;
+	text-indent: 10px;
+	background-image: url(../images/tabs_slide_up_bg.png);
+	background-position: bottom left;
+	background-repeat: no-repeat;
+	background-color: transparent;
+	overflow: hidden;
+	font:12px!important;
+	margin-left:12px;
+}
+
+#tabs_search .items li{
+	margin: 0;
+	padding: 0;
+}
+
+
+#tabs_search .items .value{display:none;}
+
+#tabs_search .items a, #tabs_search .items a:link{
+	margin: 0;
+	color: #fff;
+	text-decoration: none;
+	font:12px/35px Arial, Tahoma, Verdana, sans-serif;
+	font-weight: bold;
+}
+
+#tabs_search .items a:hover{
+	color: #14526d;
+	text-decoration: none;
+	font:12px/35px Arial, Tahoma, Verdana, sans-serif;
+	font-weight: bold;
+}
+
+#tabs_search .open {
+	margin: 0 0 0 12px;
+	top: 0;
+	left: 1px;
+}
+
+

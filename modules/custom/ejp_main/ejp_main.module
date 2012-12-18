@@ -1,0 +1,624 @@
+<?php
+
+function ejp_main_theme() {
+  return array(
+   'members' => array(
+      'template' => 'member-page',
+	    'path' => drupal_get_path('theme', 'ejp_theme') . '/templates',
+      'arguments' => array('member' => NULL),
+    ),
+   'member_cv' => array(
+      'template' => 'member-cv',
+      'path' => drupal_get_path('theme', 'ejp_theme') . '/templates',
+      'arguments' => array('member' => NULL),
+    ),
+	'blog' => array(
+      'template' => 'member-blog',
+	    'path' => drupal_get_path('theme', 'ejp_theme') . '/templates',
+      'arguments' => array('blog' => NULL, 'member_id' => NULL),
+    ),
+	'jewish_911' => array(
+      'template' => 'jewish-911',
+      'path' => drupal_get_path('theme', 'ejp_theme') . '/templates',
+      'arguments' => array('news' => NULL),
+    ),
+	'ejp_banner' => array(
+      'template' => 'ejp-banner',
+      'path' => drupal_get_path('theme', 'ejp_theme') . '/templates',
+      'arguments' => array('news' => NULL),
+    ),
+    /*'user_profile' => array(
+    	'path' => drupal_get_path('theme', 'ejp_theme') . '/templates',
+		'arguments' => array('account' => NULL),
+		'template' => 'user-profile-custom',
+	),	*/
+  );
+}
+
+
+function ejp_main_menu() {
+  $items = array();
+  $items['member/%'] = array(
+	'title' => t('Member'),
+	'page callback' => 'ejp_get_member',
+	'page arguments' => array(1),
+	'access arguments' => array('access content'),
+	'type' => MENU_CALLBACK,
+  );
+  $items['member/%/cv'] = array(
+    'title' => t('Member'),
+    'page callback' => 'ejp_get_member_cv',
+    'page arguments' => array(1),
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+  $items['members'] = array(
+    'title' => t('Members'),
+    'page callback' => 'ejp_get_all_members',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK
+  );
+  $items['email'] = array(
+    'title' => t('Mailing'),
+    'page callback' => 'ejp_make_mailing',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK
+  );
+  $items['email/%'] = array(
+    'title' => t('Mailing'),
+    'page callback' => 'ejp_make_mailing',
+    'access arguments' => array('access content'),
+    'page arguments' => array(1),
+    'type' => MENU_CALLBACK
+  );
+  $items['committees'] = array(
+    'title' => t('Committees'),
+    'page callback' => 'ejp_get_all_committees',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK
+  );
+  $items['news'] = array(
+	'title' => t('News'),
+	'page callback' => 'ejp_get_all_news',
+	'access arguments' => array('access content'),
+	'type' => MENU_CALLBACK
+  );
+  $items['events'] = array(
+	'title' => t('News'),
+	'page callback' => 'ejp_get_all_events',
+	'access arguments' => array('access content'),
+	'type' => MENU_CALLBACK
+  );
+  $items['documents'] = array(
+	'title' => t('News'),
+	'page callback' => 'ejp_get_all_documents',
+	'access arguments' => array('access content'),
+	'type' => MENU_CALLBACK
+  );
+  return $items;
+}
+
+function ejp_main_block($op = 'list', $delta = 0, $edit = array()) {
+  switch ($op) {
+  case 'list':
+    return array(
+      'ejp_news' => array('info' => t('EJP: News'), 'cache' => BLOCK_CACHE_GLOBAL),
+      'ejp_news_right' => array('info' => t('EJP: News Right'), 'cache' => BLOCK_CACHE_GLOBAL),
+	  'ejp_members' => array('info' => t('EJP: Members'), 'cache' => BLOCK_CACHE_GLOBAL),
+      //'ejp_members_right' => array('info' => t('EJP: Members Right'), 'cache' => BLOCK_CACHE_GLOBAL),
+	  'ejp_events' => array('info' => t('EJP: Events'), 'cache' => BLOCK_CACHE_GLOBAL),
+      'ejp_events_right' => array('info' => t('EJP: Events Right'), 'cache' => BLOCK_CACHE_GLOBAL),
+	  'ejp_docs' => array('info' => t('EJP: Documents'), 'cache' => BLOCK_CACHE_GLOBAL),
+      'ejp_docs_right' => array('info' => t('EJP: Documents Right'), 'cache' => BLOCK_CACHE_GLOBAL),
+	  'jewish_911' => array('info' => t('EJP: Jewish 911'), 'cache' => BLOCK_CACHE_GLOBAL),
+	  'ejp_banner' => array('info' => t('EJP: Banner'), 'cache' => BLOCK_CACHE_GLOBAL),
+    );
+    break;
+  case 'view':
+    switch ($delta) {
+      case 'ejp_news':
+            $content = ejp_get_last_news(5);
+            $subject = t('EJP News');
+            break;
+      case 'ejp_news_right':
+            $content = ejp_get_last_news(3);
+            $subject = t('EJP News');
+            break;
+	  case 'ejp_members':
+            $content = ejp_get_members(12);
+            $subject = t('EJP Members');
+            break;
+      /*case 'ejp_members_right':
+            $content = ejp_get_members(4);
+            $subject = t('EJP Members');
+            break;*/
+	  case 'ejp_events':
+            $content = ejp_get_events(4);
+            $subject = t('EJP Events');
+            break;
+      case 'ejp_events_right':
+            $content = ejp_get_events(3);
+            $subject = t('EJP Events');
+            break;
+	  case 'ejp_docs':
+            $content = ejp_get_docs(5);
+            $subject = t('EJP Documents');
+            break;
+      case 'ejp_docs_right':
+            $content = ejp_get_docs(3);
+            $subject = t('EJP Documents');
+            break;
+	  case 'jewish_911':
+			$subject = '';
+			$content = theme('jewish_911');
+			break;
+	  case 'ejp_banner':
+			$subject = '';
+			$content = theme('ejp_banner');
+      break;
+    }
+   return array('subject' => $subject, 'content' => $content);
+  break;
+  }
+}
+
+function ejp_main_user($op, &$edit, &$account, $category = NULL) {
+	if ($op == "login")
+	{
+		drupal_goto('member/' . $account->uid);
+	}
+	return;
+}
+
+function ejp_get_all_news(){
+  $output = '';
+  $views_exist = module_exists('views');
+  $alter_title_small = array(
+    'max_length' => 65,
+    'word_boundary' => FALSE,
+    'ellipsis' => TRUE,
+    'html' => TRUE,
+  );
+  $alter_main = array(
+    'max_length' => 320,
+    'word_boundary' => TRUE,
+    'ellipsis' => TRUE,
+    'html' => TRUE,
+  );
+
+  $pager_num = 0;
+  $sql  = '';
+  $sql .= "SELECT n.nid ";
+  $sql .= "FROM {node} n ";
+  $sql .= "WHERE n.status = 1 AND n.type = 'news' ";
+  $sql .= "ORDER BY n.created DESC ";
+
+
+  $result = pager_query($sql, 7, 0, NULL);
+
+
+  $output .= '<h1 class="rubrika"><a href="">News</a></h1>';
+
+  while ($data = db_fetch_object($result)) {
+    $output .= '<div class="blockmain">';
+    $output .= '<div class="teaser">';
+    $node = node_load($data->nid);
+    $output .= "<img src='/".$node->field_image[0]['filepath']."'/>";
+    $output .= "<h2>";
+    $output .= $views_exist ? l(views_trim_text($alter_title_small, $node->title), $node->path) : l($node->title, $node->path);
+    $output .= "</h2>";
+    $output .= $views_exist ? views_trim_text($alter_main, strip_tags($node->field_teaser[0]['value'])) : strip_tags($node->field_teaser[0]['value']);
+    $output .= '</div></div>';
+  }
+
+  $output .= theme('pager', NULL, 7, 0);
+  return $output;
+}
+
+function ejp_get_all_events(){
+  $output ='';
+  $views_exist = module_exists('views');
+  $alter_title_small = array(
+    'max_length' => 65,
+    'word_boundary' => FALSE,
+    'ellipsis' => TRUE,
+    'html' => TRUE,
+  );
+  $alter_main = array(
+    'max_length' => 320,
+    'word_boundary' => TRUE,
+    'ellipsis' => TRUE,
+    'html' => TRUE,
+  );
+
+  $pager_num = 0;
+  $sql  = '';
+  $sql .= "SELECT n.nid ";
+  $sql .= "FROM {node} n ";
+  $sql .= "WHERE n.status = 1 AND n.type = 'event' ";
+  $sql .= "ORDER BY n.created DESC ";
+
+
+  $result = pager_query($sql, 7, 0, NULL);
+  $output .= '<h1 class="rubrika"><a href="">Events</a></h1>';
+  while ($data = db_fetch_object($result)) {
+    $output .= '<div class="blockmain">';
+    $output .= '<div class="teaser">';
+    $node = node_load($data->nid);
+    $output .= "<img src='/".$node->field_event_image[0]['filepath']."'/>";
+    $output .= "<h2>";
+    $output .= $views_exist ? l(views_trim_text($alter_title_small, $node->title), $node->path) : l($node->title, $node->path) . "</h2>";
+    $output .= "</h2>";
+    $output .= $views_exist ? views_trim_text($alter_main, strip_tags($node->field_event_teaser[0]['value'])) : strip_tags($node->field_event_teaser[0]['value']);
+    $output .= '</div></div>';
+  }
+
+  $output .= theme('pager', NULL, 7, 0);
+  return $output;
+}
+
+function ejp_get_all_documents(){
+  $output = '';
+  $views_exist = module_exists('views');
+  $alter_title_small = array(
+    'max_length' => 65,
+    'word_boundary' => FALSE,
+    'ellipsis' => TRUE,
+    'html' => TRUE,
+  );
+  $alter_main = array(
+    'max_length' => 320,
+    'word_boundary' => TRUE,
+    'ellipsis' => TRUE,
+    'html' => TRUE,
+  );
+
+  $pager_num = 0;
+  $sql  = '';
+  $sql .= "SELECT n.nid ";
+  $sql .= "FROM {node} n ";
+  $sql .= "WHERE n.status = 1 AND n.type = 'document' ";
+  $sql .= "ORDER BY n.created DESC ";
+
+  $result = pager_query($sql, 7, 0, NULL);
+  $output .= '<h1 class="rubrika"><a href="">Documents</a></h1>';
+  while ($data = db_fetch_object($result)) {
+    $node = node_load($data->nid);
+    $output .= '<div class="blockmain">';
+    $output .= '<div class="teaser">';
+    $output .= "<h2>";
+    $output .=  $views_exist ? l(views_trim_text($alter_title_small, $node->title), $node->path) : l($node->title, $node->path);
+    $output .= "</h2>";
+    $output .= $views_exist ? views_trim_text($alter_main, strip_tags($node->field_doc_teaser[0]['value'])) : strip_tags($node->field_doc_teaser[0]['value']);
+    $output .= '</div></div>';
+  }
+
+  $output .= theme('pager', NULL, 7, 0);
+  return $output;
+}
+
+function ejp_get_last_news($limit=5) {
+  $sql  = '';
+  $sql .= "SELECT n.nid ";
+  $sql .= "FROM {node} n ";
+  $sql .= "WHERE n.status = 1 AND n.type = 'news' ";
+  $sql .= "ORDER BY n.created DESC LIMIT 0, " . $limit;
+
+  $main_items = db_query($sql);
+
+  while($data_result = db_fetch_object($main_items)) {
+    $node = node_load($data_result->nid);
+    $data[] = node_prepare($node);
+  }
+  if (isset($data) && !empty($data)) {
+    return $data;
+  }
+  else return '';
+}
+
+function ejp_get_members($limit=12) {
+
+ $sql = "SELECT
+	users.uid AS uid,
+	users.picture AS users_picture,
+	profile_values_profile_first_name.value AS profile_values_profile_first_name_value,
+	profile_values_profile_last_name.value AS profile_values_profile_last_name_value,
+	profile_values_profile_country.value AS profile_values_profile_country_value
+	FROM users users
+	LEFT JOIN profile_values profile_values_profile_first_name ON users.uid = profile_values_profile_first_name.uid AND profile_values_profile_first_name.fid = '1'
+	LEFT JOIN profile_values profile_values_profile_last_name ON users.uid = profile_values_profile_last_name.uid AND profile_values_profile_last_name.fid = '2'
+	LEFT JOIN profile_values profile_values_profile_country ON users.uid = profile_values_profile_country.uid AND profile_values_profile_country.fid = '3'
+	WHERE users.uid>1 ORDER BY RAND() LIMIT " . $limit;
+
+  $main_items = db_query($sql);
+
+  while($data_result = db_fetch_object($main_items)) {
+     $data[] = $data_result;
+  }
+  if (isset($data) && !empty($data)) {
+    return $data;
+  }
+  else return '';
+}
+
+function ejp_get_all_members() {
+ $output = "";
+ $pager_num = 0;
+ $sql = "SELECT
+	users.uid AS uid,
+	users.picture AS users_picture,
+	profile_values_profile_first_name.value AS profile_values_profile_first_name_value,
+	profile_values_profile_last_name.value AS profile_values_profile_last_name_value,
+	profile_values_profile_country.value AS profile_values_profile_country_value
+	FROM users users
+	LEFT JOIN profile_values profile_values_profile_first_name ON users.uid = profile_values_profile_first_name.uid AND profile_values_profile_first_name.fid = '1'
+	LEFT JOIN profile_values profile_values_profile_last_name ON users.uid = profile_values_profile_last_name.uid AND profile_values_profile_last_name.fid = '2'
+	LEFT JOIN profile_values profile_values_profile_country ON users.uid = profile_values_profile_country.uid AND profile_values_profile_country.fid = '3'
+	WHERE users.uid>1 ORDER BY profile_values_profile_country_value ";
+
+  $main_items = db_query($sql);
+  $country = "";
+  $count = 0;
+  $output .= '<div class="membersblock">';
+  $output .= '<div class="memberscol">';
+  while($data_result = db_fetch_object($main_items)) {
+		if ($count == 39 or $count == 66 ) $output .= '</div><div class="memberscol">';
+		if ($country != $data_result->profile_values_profile_country_value) {
+			$country = $data_result->profile_values_profile_country_value;
+			$output .= "<h1 class='rubrika'><a name='".$data_result->profile_values_profile_country_value."'>" .$data_result->profile_values_profile_country_value. "</a></h1>";
+		}
+		//$output .= '<img src="/'. $data_result->users_picture .'"></br>';
+
+		$output .= "<a href='/member/". $data_result->uid."'>";
+		$output .= $data_result->profile_values_profile_first_name_value ." ";
+		$output .= $data_result->profile_values_profile_last_name_value;
+		$output .= "</a>";
+		//$output .= $data_result->profile_values_profile_country_value . '</br></br>';
+		$count++;
+  }
+  $output .= '</div></div>';
+  return $output;
+}
+
+function ejp_get_events($limit=5) {
+  $sql  = '';
+  $sql .= "SELECT n.nid ";
+  $sql .= "FROM {node} n ";
+  $sql .= "WHERE n.status = 1 AND n.type = 'event' ";
+  $sql .= "ORDER BY n.created DESC LIMIT 0, " . $limit;
+
+  $main_items = db_query($sql);
+
+  while($data_result = db_fetch_object($main_items)) {
+    $node = node_load($data_result->nid);
+    $data[] = node_prepare($node);
+  }
+  if (isset($data) && !empty($data)) {
+    return $data;
+  }
+  else return '';
+}
+
+function ejp_get_docs($limit=5) {
+  $sql  = '';
+  $sql .= "SELECT n.nid ";
+  $sql .= "FROM {node} n ";
+  $sql .= "WHERE n.status = 1 AND n.type = 'document' ";
+  $sql .= "ORDER BY n.created DESC LIMIT 0, " . $limit;
+
+  $main_items = db_query($sql);
+
+  while($data_result = db_fetch_object($main_items)) {
+    $node = node_load($data_result->nid);
+    $data[] = node_prepare($node);
+  }
+  if (isset($data) && !empty($data)) {
+    return $data;
+  }
+  else return '';
+}
+
+
+function ejp_get_member($member_id) {
+
+/*
+	drupal_add_js(drupal_get_path('theme', 'ejp_theme') . "/js/jquery.truncatable.js", "theme");
+	drupal_add_js(
+	"$(function(){
+	 $('.myClass').truncatable({	limit: 320, more: 'Read more', less: true, hideText: 'Less' });
+	});"
+	, "inline");
+*/
+	$member = user_load(array('uid' => $member_id));
+	if (isset($member) && !empty($member))
+	{
+		$form = drupal_get_form("ejp_theme_member_form", $member_id);
+		$output = theme('members', $member);
+		$pager_num = 0;
+		$sql  = '';
+		$sql .= "SELECT n.nid ";
+		$sql .= "FROM {node} n ";
+		$sql .= "WHERE n.status = 1 AND n.type = 'blog' and n.uid = ".$member_id;
+		$sql .= " ORDER BY n.created DESC ";
+
+		$main_items = pager_query($sql, 2, 0, NULL);
+
+		while($data_result = db_fetch_object($main_items)) {
+			$node = node_load($data_result->nid);
+			$data[] = node_prepare($node);
+		}
+		if (isset($data) && !empty($data)) {
+
+			$output .= theme('blog', $data, $member_id);
+			$output .= theme('pager', NULL, 2, 0);
+		}
+		$output .= '<div class="pad"></div><a  name="contact"><h1 class="rubrika" name="contact">Contact me</h1></a>';
+		$output .= $form;
+	}
+
+	return $output;
+}
+
+function ejp_theme_member_form($form_state, $member_id) {
+	$form = array();
+
+  $form['name'] = array(
+		'#type' => 'textfield',
+		'#required' => TRUE,
+		'#title' => 'Name',
+	);
+	$form['email'] = array(
+		'#type' => 'textfield',
+		'#required' => TRUE,
+		'#title' => 'Email',
+	);
+	$form['message'] = array(
+		'#type' => 'textarea',
+		'#required' => TRUE,
+		'#title' => 'Message',
+	);
+	$form['member_id'] = array(
+		'#type' => 'hidden',
+		'#value' => $member_id,
+	);
+	$form['submit'] = array(
+		'#type' => 'submit',
+		'#value' => 'Send',
+	);
+
+	return $form;
+}
+
+function ejp_theme_member_form_validate($form, &$form_state) {
+	$mail = $form['email']['#value'];
+	if (!valid_email_address($mail)) {
+		form_set_error('email', t('The email address appears to be invalid.'));
+	}
+}
+
+function ejp_theme_member_form_submit(&$form, &$form_state) {
+  $member_id = $form_state['values']['member_id'];
+  $member = user_load(array('uid' => $member_id));
+  if ($member->uid>1)
+  {
+    //TODO send message to member's email
+    drupal_set_message("You message has been sent to " . $member->mail);
+  }
+}
+
+function ejp_theme_wysiwyg_editor_settings_alter(&$settings, $context) {
+  if($context['profile']->editor == 'ckeditor') {
+    $settings['enterMode'] = 2;
+    $settings['shiftEnterMode'] = 1;
+  } else if($context['profile']->editor == 'tinymce') {
+    $settings['forced_root_block'] = FALSE;
+    $settings['force_br_newlines'] = TRUE;
+    $settings['force_p_newlines'] = FALSE;
+  }
+}
+
+function ejp_get_member_cv($member_id) {
+  $member = user_load(array('uid' => $member_id));
+  if (isset($member) && !empty($member))
+  {
+    $output = theme('member_cv', $member);
+  }
+
+  return $output;
+}
+
+function ejp_get_all_committees() {
+  $output = '';
+  $sql  = '';
+  $sql .= "SELECT n.nid ";
+  $sql .= "FROM {node} n ";
+  $sql .= "WHERE n.status = 1 AND n.type = 'committee' ";
+  $sql .= "ORDER BY n.created";
+
+  $result = db_query($sql);
+
+  while($data_result = db_fetch_object($result)) {
+    $node = node_load($data_result->nid);
+    $output .= '<a href="'.$node->path.'">'.$node->title.'</a><br>';
+  }
+
+  return $output;
+}
+
+function ejp_mailing_form(&$form_state, $usr_code) {
+  $users = array();
+
+  if ($usr_code==0) $users = ejp_get_all_users();
+  else $users = ejp_get_users_from_node($usr_code);
+  //dsm($users);
+  $form = Array();
+
+  $form['mailing_subject'] = array(
+    '#title' => t("Subject"),
+    '#required' => TRUE,
+    '#type' => 'textfield',
+  );
+
+  $form['mailing_recipients']=array (
+
+    '#type'=>'select',
+    '#title'=>'Recipients',
+    '#options'=>$users,
+    '#required' => TRUE,
+    '#multiple'=>TRUE,
+    '#size' => 15,
+  );
+
+  $form['mailing_body'] = array(
+    '#title' => t('Message'),
+    '#type' => 'textarea',
+    '#rows' => 10,
+    '#cols' => 60,
+    '#resizable' => TRUE,
+  );
+
+  $form['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Send Email'),
+  );
+
+  return $form;
+}
+
+function ejp_make_mailing($com=0) {
+  global $user;
+
+  if ($user->uid <=0) return drupal_access_denied();
+  if ($com==0) return drupal_get_form('ejp_mailing_form', 0);
+  else return drupal_get_form('ejp_mailing_form', $com);
+}
+
+
+function ejp_get_all_users() {
+  $sql  = '';
+  $sql .= "SELECT uid ";
+  $sql .= "FROM {users} ";
+  $sql .= "WHERE uid > 1 order by name";
+
+  $result = db_query($sql);
+
+  while($data_result = db_fetch_object($result)) {
+    $user = user_load(array('uid'=>$data_result->uid));
+    //dsm($user);
+    $fio = $user->profile_first_name . ' ' . $user->profile_last_name;
+    $output[$user->mail] = $fio;
+  }
+  return $output;
+}
+
+function ejp_get_users_from_node($node_id) {
+  $output = '';
+  $node = node_load($node_id);
+  foreach ($node->field_committee_users as $com_user) {
+    $user = user_load(array('uid'=>$com_user['uid']));
+    dsm($user);
+    $fio = $user->profile_first_name . ' ' . $user->profile_last_name;
+    $output[$user->mail] = $fio;
+  }
+  return $output;
+}

@@ -1,0 +1,6 @@
+; $Id$
+name = EJP Theme Module
+description = EJP Theme Module.
+core = 6.x
+package = EJP
+version = "6.x-1.0"
